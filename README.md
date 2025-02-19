@@ -10,7 +10,7 @@ The **Financial Assistant Agent** is a React-based application that integrates m
 - **Requests Tool:** For making REST API calls.
 - **Redis Caching:** To cache frequently requested stock data and reduce repeated external API calls.
 
-This project is designed with modularity, robust error handling, and validations, making it easily extendable for future enhancements.
+This project is designed with modularity, robust error handling, and validations in mind, making it easily extendable for future enhancements.
 
 ---
 
@@ -43,26 +43,26 @@ cd financial-assistant-agent
 
 ### Backend Setup
 
-#### Create and Activate Virtual Environment:
+#### Create and Activate Virtual Environment
 ```bash
 cd backend
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-#### Install Python Dependencies:
-Ensure `requirements.txt` exists in `backend/` and run:
+#### Install Python Dependencies
+Make sure `requirements.txt` exists in the `backend/` folder, then run:
 ```bash
 pip install -r requirements.txt
 ```
 
-#### Set Up the .env File:
-Create a file named `.env` in `backend/` with the following content:
+#### Set Up the .env File
+Create a file named `.env` in the `backend/` folder with the following content:
 ```env
 ALPHA_VANTAGE_API_KEY=your_alpha_vantage_api_key_here
 ```
 
-#### Run the Backend Server:
+#### Run the Backend Server
 ```bash
 uvicorn main:app --reload
 ```
@@ -70,24 +70,24 @@ The backend should be accessible at [http://127.0.0.1:8000](http://127.0.0.1:800
 
 ### Frontend Setup
 
-#### Install Node.js and npm:
+#### Install Node.js and npm
 Download and install Node.js (v16 or later) from [nodejs.org](https://nodejs.org).
 
-#### Set Up the Frontend:
+#### Set Up the Frontend
 ```bash
 cd ../frontend
 ```
-If not already set up:
+If the React app is not already set up:
 ```bash
 npx create-react-app .
 ```
 
-#### Install Frontend Dependencies:
+#### Install Frontend Dependencies
 ```bash
 npm install axios
 ```
 
-#### Run the Frontend App:
+#### Run the Frontend App
 ```bash
 npm start
 ```
@@ -97,18 +97,18 @@ The app will be accessible at [http://localhost:3000](http://localhost:3000).
 
 ## Testing Instructions
 
-### Backend Tests (pytest):
+### Backend Tests (pytest)
+Run all backend tests from the `backend/` folder:
 ```bash
 pytest
 ```
-Runs all backend tests.
 
-### Frontend Tests (Jest):
-Ensure `src/setupTests.js` contains:
+### Frontend Tests (Jest)
+Ensure your `src/setupTests.js` includes:
 ```js
 import '@testing-library/jest-dom';
 ```
-Run tests:
+Then run:
 ```bash
 npm test
 ```
@@ -117,7 +117,7 @@ npm test
 
 ## Deployment Instructions
 
-### Docker Containerization
+### Docker Containerization (Optional)
 
 #### Backend Dockerfile
 ```dockerfile
@@ -152,8 +152,8 @@ services:
     build: ./backend
     ports:
       - "8000:8000"
-    env_file:
-       - backend/.env
+    environment:
+      - ALPHA_VANTAGE_API_KEY=your_api_key_here
   frontend:
     build: ./frontend
     ports:
@@ -198,6 +198,16 @@ curl "http://127.0.0.1:8000/news?symbol=AAPL"
 
 ---
 
+## Future Enhancements
+
+- **Authentication:** Implement API key-based or JWT authentication.
+- **Real-Time Updates:** Add WebSocket support for live stock price updates.
+- **Advanced Caching:** Enhance caching strategies using Redis.
+- **Monitoring:** Integrate tools like Sentry for error tracking.
+- **Additional Data Sources:** Expand to include more financial data APIs.
+
+---
+
 ## Caching Implementation
 
 The backend uses **Redis Caching**:
@@ -209,18 +219,19 @@ This strategy minimizes external API calls and helps avoid exceeding rate limits
 
 ---
 
-## Future Enhancements
+## Data Persistence and Historical Data Query
 
-- **Authentication:** Implement API key-based or JWT authentication.
-- **Real-Time Updates:** Add WebSocket support for live stock price updates.
-- **Advanced Caching:** Enhance caching strategies using Redis.
-- **Monitoring:** Integrate tools like Sentry for error tracking.
-- **Additional Data Sources:** Expand to include more financial data APIs.
+### Historical Data Query:
+- **Purpose:** To allow users to query historical financial data.
+- **Data Source:** A CSV file (`data/historical_data.csv`) loaded into Apache Spark at startup.
+- **Usage:** When a user enters a SQL query (e.g., `SELECT * FROM stock_data WHERE symbol='AAPL'`), Spark SQL executes the query against the CSV data, returning the matching records.
+- **Persistence:** In this project, historical data is stored in a CSV file. For a production scenario, consider using a robust database.
 
 ---
 
-
 ## Conclusion
 
-The **Financial Assistant Agent** is a fully integrated financial tool providing real-time stock prices, historical data analysis, and financial news through a user-friendly React interface. The application is containerized with Docker and is deployment-ready. Future enhancements include authentication, real-time updates, and further optimizations.
+The **Financial Assistant Agent** is a fully integrated financial tool providing real-time stock prices, historical data analysis, and financial news through a user-friendly React interface. The application is containerized with Docker and is deployment-ready. Future enhancements include authentication, real-time updates, and further performance optimizations.
+
+
 
