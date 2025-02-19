@@ -83,3 +83,11 @@ def external_api(url: str = Query(..., description="External API URL"),
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+"""
+cd backend
+uvicorn main:app --host 0.0.0.0 --port 8000
+
+
+"""

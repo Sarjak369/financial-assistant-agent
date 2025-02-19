@@ -19,3 +19,13 @@ describe('App Component', () => {
         expect(screen.getAllByText(/Financial News/i).length).toBeGreaterThan(0);
     });
 });
+
+
+
+// cd frontend
+// npm start
+
+
+// npm test -- --watchAll
+
+

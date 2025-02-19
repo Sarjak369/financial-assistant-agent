@@ -20,3 +20,7 @@ function App() {
 }
 
 export default App;
+
+
+// cd frontend
+// npm start
