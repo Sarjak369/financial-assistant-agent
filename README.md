@@ -152,8 +152,8 @@ services:
     build: ./backend
     ports:
       - "8000:8000"
-    environment:
-      - ALPHA_VANTAGE_API_KEY=your_api_key_here
+    env_file:
+       - backend/.env
   frontend:
     build: ./frontend
     ports:
