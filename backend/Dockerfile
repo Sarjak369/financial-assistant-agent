@@ -1,31 +1,32 @@
-# Use a Debian-based Python image (Bullseye is a stable base)
+# Use a lightweight Python image
 FROM python:3.11-slim-bullseye
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /app
 
-# Update package lists and install Java and procps (provides 'ps' command)
+# Install Java 11 and required dependencies
 RUN apt-get update && apt-get install -y \
     openjdk-11-jdk \
+    curl \
     procps \
     && apt-get clean
 
-# Set JAVA_HOME environment variable based on our inspection
+# Set Java environment variables to the correct path
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-arm64
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
-# Verify Java installation (prints Java version)
+# Verify Java installation
 RUN java -version
 
-# Copy the requirements file and install Python dependencies
+# Copy dependency files first (for better Docker caching)
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# Copy the rest of your backend code into the container
+# Copy the rest of the application
 COPY . .
 
-# Expose port 8000 for the FastAPI application
+# Expose the backend port
 EXPOSE 8000
 
-# Run the FastAPI app using Uvicorn. Using "sh -c" ensures environment variables are in effect.
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port 8000"]
+# Run the FastAPI app using Uvicorn
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
