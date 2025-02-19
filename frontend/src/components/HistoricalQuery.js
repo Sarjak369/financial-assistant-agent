@@ -6,13 +6,10 @@ function HistoricalQuery() {
     const [result, setResult] = useState(null);
     const [error, setError] = useState('');
 
-
-    const API_BASE_URL = "https://financial-assistant-agent-backend.fly.dev";
-
     const runQuery = async () => {
         try {
-            // const response = await axios.get(`http://127.0.0.1:8000/historical-data?query=${encodeURIComponent(query)}`);
-            const response = await axios.get(`${API_BASE_URL}/historical-data?query=${encodeURIComponent(query)}`);
+            const response = await axios.get(`http://127.0.0.1:8000/historical-data?query=${encodeURIComponent(query)}`);
+
             console.log("API Response:", response.data);  // Debugging line
 
             // Ensure the response is in the correct format before setting the result

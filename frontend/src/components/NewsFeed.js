@@ -5,13 +5,10 @@ function NewsFeed() {
     const [news, setNews] = useState([]);
     const [error, setError] = useState("");
 
-    const API_BASE_URL = "https://financial-assistant-agent-backend.fly.dev";
 
     const fetchNews = async () => {
         try {
-            // const response = await fetch(`http://127.0.0.1:8000/news?symbol=${symbol}`);
-            const response = await fetch(`${API_BASE_URL}/news?symbol=${symbol}`);
-
+            const response = await fetch(`http://127.0.0.1:8000/news?symbol=${symbol}`);
 
             const data = await response.json();
 

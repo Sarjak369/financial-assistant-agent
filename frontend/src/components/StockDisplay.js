@@ -5,7 +5,6 @@ function StockDisplay() {
     const [data, setData] = useState(null);
     const [error, setError] = useState('');
 
-    const REACT_APP_API_BASE_URL = "https://financial-assistant-agent-backend.fly.dev";
 
     const fetchStockPrice = async () => {
         setError(''); // Reset error message
@@ -14,9 +13,7 @@ function StockDisplay() {
 
         try {
             console.log("Fetching stock price for:", symbol);
-            // const response = await fetch(`http://127.0.0.1:8000/stock-price?symbol=${symbol}`);
-            const response = await fetch(`${REACT_APP_API_BASE_URL}/stock-price?symbol=${symbol}`);
-
+            const response = await fetch(`http://127.0.0.1:8000/stock-price?symbol=${symbol}`);
 
             if (!response.ok) {
                 const errorData = await response.json();
