@@ -24,3 +24,6 @@ export default App;
 
 // cd frontend
 // npm start
+
+// npm test -- --watchAll
+// This will run all tests regardless of whether they've changed.

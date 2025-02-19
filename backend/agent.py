@@ -9,10 +9,10 @@ from langchain_community.tools.yahoo_finance_news import YahooFinanceNewsTool
 from langchain_community.tools.spark_sql.tool import QuerySparkSQLTool
 from langchain_community.utilities.spark_sql import SparkSQL
 import time
-
 import redis
 import json
 import time
+from pyspark.sql.types import StructType, StructField, StringType, FloatType
 
 # Connect to Redis (adjust host/port if needed)
 redis_client = redis.Redis(host='localhost', port=6379,
@@ -43,6 +43,26 @@ class FinancialAgent:
             .getOrCreate()
         # .config("spark.driver.extraJavaOptions", "-Djava.security.manager=allow") \
 
+        # NEW: Load CSV instead of hard-coded data
+        # or an absolute path
+        csv_path = os.path.join("data", "historical_data.csv")
+
+        schema = StructType([
+            StructField("date", StringType(), True),
+            StructField("symbol", StringType(), True),
+            StructField("open", FloatType(), True),
+            StructField("close", FloatType(), True),
+            StructField("high", FloatType(), True),
+            StructField("low", FloatType(), True),
+            StructField("volume", FloatType(), True)
+        ])
+        df = self.spark.read.csv(csv_path, header=True, inferSchema=True)
+
+        df.createOrReplaceTempView("stock_data")
+
+        """
+        # OLD: Hard-coded data
+    
         # Create a sample DataFrame (replace with your actual data source)
         data = [
             Row(date="2024-02-10", symbol="AAPL", open=184.2, close=185.3),
@@ -50,6 +70,7 @@ class FinancialAgent:
         ]
         df = self.spark.createDataFrame(data)
         df.createOrReplaceTempView("stock_data")  # Creates an in-memory table
+        """
 
         # Create SparkSQL instance and initialize QuerySparkSQLTool with it
         self.spark_sql = SparkSQL(self.spark)

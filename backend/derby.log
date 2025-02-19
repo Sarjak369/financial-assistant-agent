@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Wed Feb 19 12:46:28 EST 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0195-1f51-7add-00000cc22470 
+on database directory /Users/sarjak/Desktop/My_Projects/Projects_2025/Financial_Assistant_Agent/backend/metastore_db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@42110406 
+Loaded from file:/Users/sarjak/Desktop/My_Projects/Projects_2025/Financial_Assistant_Agent/.venv/lib/python3.11/site-packages/pyspark/jars/derby-10.14.2.0.jar
+java.vendor=Homebrew
+java.runtime.version=11.0.26+0
+user.dir=/Users/sarjak/Desktop/My_Projects/Projects_2025/Financial_Assistant_Agent/backend
+os.name=Mac OS X
+os.arch=x86_64
+os.version=15.2
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
