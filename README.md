@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-The **Financial Assistant Agent** is a React-based application that integrates multiple financial data tools to provide real-time stock prices, historical financial data, and the latest financial news. The backend is built using FastAPI and Python, leveraging various APIs and tools, including:
+The **Financial Assistant Agent** is a ReAct-based Agent that integrates multiple financial data tools to provide real-time stock prices, historical financial data, and the latest financial news. The backend is built using FastAPI and Python, leveraging various APIs and tools, including:
 
 - **Alpha Vantage:** For fetching real-time stock prices.
 - **Spark SQL:** For querying and analyzing historical financial data.
